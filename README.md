@@ -1,4 +1,5 @@
 # Aoc2020
+[![Build Status](https://travis-ci.com/Ryosuke37859/aoc2020.svg?branch=main)](https://travis-ci.com/Ryosuke37859/aoc2020)
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/aoc2020`. To experiment with that code, run `bin/console` for an interactive prompt.
 
@@ -32,7 +33,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/aoc2020.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Ryosuke37859/aoc2020.
 
 
 ## License
