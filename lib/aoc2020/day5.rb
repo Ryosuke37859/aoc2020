@@ -25,9 +25,29 @@ class Aoc2020
       boarding_passes.max_by { |pass| pass[:seat_id] }.fetch(:seat_id)
     end
 
-    def part_two; end
+    def part_two
+      seats = boarding_passes.sort_by { |pass| pass[:seat_id] }
+      # drop all entries from first and last row
+      seats = remove_first_and_last_rows(seats)
+      # find the two entries where y - x == 2
+      find_last_empty_seat(seats)
+    end
 
     private
+
+    def remove_first_and_last_rows(rows)
+      rows = rows.reject { |pass| pass[:row] == rows.first[:row] }
+      rows.reject { |pass| pass[:row] == rows.last[:row] }
+    end
+
+    def find_last_empty_seat(seats)
+      seats = seats.each_cons(2).map do |first, second|
+        first[:seat_id] + 1 if second[:seat_id] - first[:seat_id] == 2
+      end.compact
+      raise Error, 'multiple empty seats' unless seats.count == 1
+
+      seats[0]
+    end
 
     def decode_row(bp_code)
       search_partitions('F', 'B', 0..127, bp_code[0..6])
