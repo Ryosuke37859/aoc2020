@@ -2,22 +2,28 @@
 
 class Aoc2020
   class Day2
-    attr_accessor :input, :valid_passwords, :invalid_passwords
+    attr_accessor :input, :part_one_valid_passwords, :part_one_invalid_passwords,
+                  :part_two_valid_passwords, :part_two_invalid_passwords
 
-    PASSWORD_DATA_REGEX = /(?<min>\d+)-(?<max>\d+) (?<character>.): (?<password>.*)/.freeze
+    PASSWORD_DATA_REGEX = /(?<first>\d+)-(?<second>\d+) (?<character>.): (?<password>.*)/.freeze
 
     def initialize(input)
       @input = input
-      @valid_passwords = []
-      @invalid_passwords = []
-      validate_passwords
+      @part_one_valid_passwords = []
+      @part_one_invalid_passwords = []
+      @part_two_valid_passwords = []
+      @part_two_invalid_passwords = []
+      part_one_validate_passwords
+      part_two_validate_passwords
     end
 
     def part_one
-      valid_passwords.length
+      part_one_valid_passwords.length
     end
 
-    def part_two; end
+    def part_two
+      part_two_valid_passwords.length
+    end
 
     private
 
@@ -33,16 +39,30 @@ class Aoc2020
       data.match(PASSWORD_DATA_REGEX)&.named_captures&.transform_keys(&:to_sym)
     end
 
-    def valid_password?(min:, max:, character:, password:)
-      (min.to_i..max.to_i).include? password.scan(character).length
+    def part_one_valid_password?(first:, second:, character:, password:)
+      (first.to_i..second.to_i).include? password.scan(character).length
     end
 
-    def validate_passwords
+    def part_one_validate_passwords
       data.each do |password_data|
-        if valid_password?(**password_data)
-          valid_passwords << password_data
+        if part_one_valid_password?(**password_data)
+          part_one_valid_passwords << password_data
         else
-          invalid_passwords << password_data
+          part_one_invalid_passwords << password_data
+        end
+      end
+    end
+
+    def part_two_valid_password?(first:, second:, character:, password:)
+      [password[first.to_i - 1], password[second.to_i - 1]].count(character) == 1
+    end
+
+    def part_two_validate_passwords
+      data.each do |password_data|
+        if part_two_valid_password?(**password_data)
+          part_two_valid_passwords << password_data
+        else
+          part_two_invalid_passwords << password_data
         end
       end
     end

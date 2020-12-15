@@ -14,4 +14,8 @@ RSpec.describe Aoc2020::Day2 do
   it 'solves part one' do
     expect(subject.part_one).to eq(2)
   end
+
+  it 'solves part two' do
+    expect(subject.part_two).to eq(1)
+  end
 end
