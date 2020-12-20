@@ -9,6 +9,7 @@ require_relative 'aoc2020/day5'
 require_relative 'aoc2020/day6'
 require_relative 'aoc2020/day7'
 require_relative 'aoc2020/day8'
+require_relative 'aoc2020/day9'
 
 class Aoc2020
   class Error < StandardError; end
